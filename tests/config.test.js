@@ -8,7 +8,7 @@ describe('deploy and PWA config files', () => {
   it('vercel.json is valid JSON and rewrites every path to the SPA entry', () => {
     const config = JSON.parse(read('vercel.json'))
     expect(config.outputDirectory).toBe('dist')
-    expect(config.rewrites).toEqual([{ source: '/(.*)', destination: '/index.html' }])
+    expect(config.rewrites).toEqual([{ source: '/((?!assets/).*)', destination: '/index.html' }]) // a missing /assets file must 404, not return HTML
   })
 
   it('the web manifest is valid JSON and its icon files exist', () => {

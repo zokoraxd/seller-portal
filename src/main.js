@@ -11,6 +11,7 @@ import '@fontsource/cairo/latin-800.css'
 import './assets/main.css'
 
 import App from './App.vue'
+import { reloadOnceForNewDeployment } from './lib/staleChunk'
 import router from './router'
 import { useAppStore } from './stores/app'
 
@@ -21,5 +22,10 @@ async function boot() {
   await router.isReady()
   app.mount('#app')
 }
+
+// Vite fires this when a lazily loaded file is gone, i.e. the tab is running an old deployment.
+window.addEventListener('vite:preloadError', (event) => {
+  if (reloadOnceForNewDeployment(location.href)) event.preventDefault()
+})
 
 boot()

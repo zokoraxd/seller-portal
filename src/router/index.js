@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { START_LOCATION, createRouter, createWebHistory } from 'vue-router'
+import { clearReloadFlag, isStaleChunkError, reloadOnceForNewDeployment } from '@/lib/staleChunk'
 import { useAppStore } from '@/stores/app'
 
 // Views are lazy-loaded so the first screen stays small (Chart.js and xlsx load on demand).
@@ -55,6 +56,11 @@ export const navCount = ref(0)
 router.afterEach((to, from) => {
   document.title = `${TITLES[to.name] ?? 'بوابة التاجر'} — بوابة التاجر (نموذج مفاهيمي)`
   if (from !== START_LOCATION) navCount.value++
+  clearReloadFlag() // this page loaded fine, so a later stale-build reload is allowed again
+})
+
+router.onError((error, to) => {
+  if (isStaleChunkError(error)) reloadOnceForNewDeployment(to.fullPath)
 })
 
 export const DEFAULT_ROUTE = { admin: 'admin-analytics', merchant: 'merchant-overview' }
