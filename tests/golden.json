@@ -1,0 +1,263 @@
+{
+  "stores": [
+    {
+      "name": "معرض البغدادي للأجهزة",
+      "category": "الأجهزة المنزلية",
+      "city": "بغداد",
+      "deliveredUnits": 323,
+      "returnedUnits": 10,
+      "totalGmv": 66985000,
+      "totalBuyCost": 47840000,
+      "totalGrossProfit": 19145000,
+      "deliveryHoursWeighted": 7428,
+      "totalUnitsAll": 333,
+      "bnplUnits": 213,
+      "txCount": 4,
+      "aov": 207384,
+      "marginPct": 28.6,
+      "returnRate": 3,
+      "avgDeliveryHours": 22,
+      "bnplShare": 66,
+      "healthScore": 89
+    },
+    {
+      "name": "تكنو كرادة ستور",
+      "category": "الإلكترونيات",
+      "city": "بغداد",
+      "deliveredUnits": 515,
+      "returnedUnits": 18,
+      "totalGmv": 56190000,
+      "totalBuyCost": 41140000,
+      "totalGrossProfit": 15050000,
+      "deliveryHoursWeighted": 8526,
+      "totalUnitsAll": 533,
+      "bnplUnits": 0,
+      "txCount": 4,
+      "aov": 109107,
+      "marginPct": 26.8,
+      "returnRate": 3.4,
+      "avgDeliveryHours": 16,
+      "bnplShare": 0,
+      "healthScore": 90
+    },
+    {
+      "name": "دار الرافدين للمنزل",
+      "category": "الأجهزة المنزلية",
+      "city": "أربيل",
+      "deliveredUnits": 190,
+      "returnedUnits": 9,
+      "totalGmv": 34400000,
+      "totalBuyCost": 24630000,
+      "totalGrossProfit": 9770000,
+      "deliveryHoursWeighted": 5962,
+      "totalUnitsAll": 199,
+      "bnplUnits": 190,
+      "txCount": 3,
+      "aov": 181053,
+      "marginPct": 28.4,
+      "returnRate": 4.5,
+      "avgDeliveryHours": 30,
+      "bnplShare": 100,
+      "healthScore": 73
+    },
+    {
+      "name": "بيت العود والعطور",
+      "category": "العطور والتجميل",
+      "city": "البصرة",
+      "deliveredUnits": 480,
+      "returnedUnits": 11,
+      "totalGmv": 29785000,
+      "totalBuyCost": 16755000,
+      "totalGrossProfit": 13030000,
+      "deliveryHoursWeighted": 9726,
+      "totalUnitsAll": 491,
+      "bnplUnits": 0,
+      "txCount": 4,
+      "aov": 62052,
+      "marginPct": 43.7,
+      "returnRate": 2.2,
+      "avgDeliveryHours": 20,
+      "bnplShare": 0,
+      "healthScore": 84
+    },
+    {
+      "name": "لمسة بيوتي — المنصور",
+      "category": "العطور والتجميل",
+      "city": "بغداد",
+      "deliveredUnits": 405,
+      "returnedUnits": 12,
+      "totalGmv": 22710000,
+      "totalBuyCost": 11955000,
+      "totalGrossProfit": 10755000,
+      "deliveryHoursWeighted": 6276,
+      "totalUnitsAll": 417,
+      "bnplUnits": 0,
+      "txCount": 3,
+      "aov": 56074,
+      "marginPct": 47.4,
+      "returnRate": 2.9,
+      "avgDeliveryHours": 15,
+      "bnplShare": 0,
+      "healthScore": 81
+    },
+    {
+      "name": "أزياء دجلة الحديثة",
+      "category": "الأزياء",
+      "city": "بغداد",
+      "deliveredUnits": 325,
+      "returnedUnits": 46,
+      "totalGmv": 15975000,
+      "totalBuyCost": 9520000,
+      "totalGrossProfit": 6455000,
+      "deliveryHoursWeighted": 14648,
+      "totalUnitsAll": 371,
+      "bnplUnits": 0,
+      "txCount": 3,
+      "aov": 49154,
+      "marginPct": 40.4,
+      "returnRate": 12.4,
+      "avgDeliveryHours": 39,
+      "bnplShare": 0,
+      "healthScore": 54
+    }
+  ],
+  "deals": [
+    {
+      "calc": {
+        "orders": 323,
+        "aov": 207000,
+        "marginPct": 28,
+        "totalDiscountPct": 15,
+        "merchantSharePct": 60,
+        "multiplier": 1.8,
+        "commissionPct": 12,
+        "deliveryMargin": 3000,
+        "fundingSource": "bnpl"
+      },
+      "result": {
+        "platformSharePct": 40,
+        "discPerOrder": 31050,
+        "newOrders": 581,
+        "extraUnits": 258,
+        "mBefore": 10697760.000000002,
+        "mAfter": 8418690.000000004,
+        "mDelta": -2279069.999999998,
+        "pBefore": 8992320,
+        "pAfter": 11484627,
+        "pDelta": 2492307,
+        "isWinWin": false
+      }
+    },
+    {
+      "calc": {
+        "orders": 323,
+        "aov": 207000,
+        "marginPct": 28,
+        "totalDiscountPct": 15,
+        "merchantSharePct": 60,
+        "multiplier": 1.8,
+        "commissionPct": 12,
+        "deliveryMargin": 3000,
+        "fundingSource": "delivery"
+      },
+      "result": {
+        "platformSharePct": 40,
+        "discPerOrder": 31050,
+        "newOrders": 581,
+        "extraUnits": 258,
+        "mBefore": 10697760.000000002,
+        "mAfter": 8418690.000000004,
+        "mDelta": -2279069.999999998,
+        "pBefore": 8992320,
+        "pAfter": 8959020,
+        "pDelta": -33300,
+        "isWinWin": false
+      }
+    },
+    {
+      "calc": {
+        "orders": 323,
+        "aov": 207000,
+        "marginPct": 28,
+        "totalDiscountPct": 30,
+        "merchantSharePct": 60,
+        "multiplier": 1.2,
+        "commissionPct": 12,
+        "deliveryMargin": 3000,
+        "fundingSource": "commission"
+      },
+      "result": {
+        "platformSharePct": 40,
+        "discPerOrder": 62100,
+        "newOrders": 388,
+        "extraUnits": 65,
+        "mBefore": 10697760.000000002,
+        "mAfter": -1606319.9999999972,
+        "mDelta": -12304080,
+        "pBefore": 8992320,
+        "pAfter": 1164000,
+        "pDelta": -7828320,
+        "isWinWin": false
+      }
+    },
+    {
+      "calc": {
+        "orders": 323,
+        "aov": 207000,
+        "marginPct": 28,
+        "totalDiscountPct": 25,
+        "merchantSharePct": 20,
+        "multiplier": 1.8,
+        "commissionPct": 12,
+        "deliveryMargin": 3000,
+        "fundingSource": "bnpl"
+      },
+      "result": {
+        "platformSharePct": 80,
+        "discPerOrder": 51750,
+        "newOrders": 581,
+        "extraUnits": 258,
+        "mBefore": 10697760.000000002,
+        "mAfter": 13229370.000000004,
+        "mDelta": 2531610.000000002,
+        "pBefore": 8992320,
+        "pAfter": 540330,
+        "pDelta": -8451990,
+        "isWinWin": false
+      }
+    },
+    {
+      "calc": {
+        "orders": 323,
+        "aov": 207000,
+        "marginPct": 28,
+        "totalDiscountPct": 0,
+        "merchantSharePct": 60,
+        "multiplier": 1,
+        "commissionPct": 12,
+        "deliveryMargin": 3000,
+        "fundingSource": "bnpl"
+      },
+      "result": {
+        "platformSharePct": 40,
+        "discPerOrder": 0,
+        "newOrders": 323,
+        "extraUnits": 0,
+        "mBefore": 10697760.000000002,
+        "mAfter": 10697760.000000002,
+        "mDelta": 0,
+        "pBefore": 8992320,
+        "pAfter": 8992320,
+        "pDelta": 0,
+        "isWinWin": false
+      }
+    }
+  ],
+  "optimized": [
+    45,
+    60,
+    60,
+    60,
+    60
+  ]
+}

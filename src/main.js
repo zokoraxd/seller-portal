@@ -1,16 +1,16 @@
-import { createPinia } from 'pinia';
-import { createApp } from 'vue';
-import './assets/css/index.css';
+import { createPinia } from 'pinia'
+import { createApp } from 'vue'
+import '@fontsource/cairo/arabic-400.css'
+import '@fontsource/cairo/arabic-600.css'
+import '@fontsource/cairo/arabic-700.css'
+import '@fontsource/cairo/arabic-800.css'
+import '@fontsource/cairo/latin-400.css'
+import '@fontsource/cairo/latin-600.css'
+import '@fontsource/cairo/latin-700.css'
+import '@fontsource/cairo/latin-800.css'
+import './assets/main.css'
 
-import axiosPlugin from '@/plugins/axios';
-import App from './App.vue';
-import router from './router/index';
+import App from './App.vue'
+import router from './router'
 
-const pinia = createPinia();
-
-const app = createApp(App);
-app.use(router);
-app.use(pinia);
-app.use(axiosPlugin);
-
-app.mount('#app');
+createApp(App).use(createPinia()).use(router).mount('#app')

@@ -1,0 +1,5 @@
+# Demo screens are behind the entry page; only the landing page is meant to be indexed.
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /merchant/
