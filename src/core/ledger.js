@@ -9,6 +9,12 @@ export const STATUS_LABEL = { delivered: 'مكتمل', returned: 'مرتجع' }
 
 export const MAX_ROWS = 20_000
 
+// Same ceilings as the database check constraints, so a bad value is caught in the review
+// table instead of failing the whole import at the server.
+export const MAX_UNITS = 1_000_000
+export const MAX_IQD = 100_000_000_000
+export const MAX_DELIVERY_HOURS = 10_000
+
 // ---------------------------------------------------------------------------
 // Matching free text to the fixed vocabularies. Return null when unsure:
 // the review screen asks the user instead of silently guessing.
@@ -68,8 +74,8 @@ function buildRow(raw, rowNum, forcedStore) {
   if (!store_name) issues.push(issue('store_name', 'error', 'missing_store', 'اسم المتجر مفقود'))
 
   let units_sold = parseAmount(m.units_sold)
-  if (units_sold === null || units_sold <= 0) {
-    issues.push(issue('units_sold', 'error', 'bad_units', 'الكمية يجب أن تكون رقماً أكبر من 0'))
+  if (units_sold === null || units_sold <= 0 || units_sold > MAX_UNITS) {
+    issues.push(issue('units_sold', 'error', 'bad_units', 'الكمية يجب أن تكون رقماً بين 1 ومليون'))
     units_sold = null
   } else if (!Number.isInteger(units_sold)) {
     units_sold = Math.round(units_sold)
@@ -77,13 +83,13 @@ function buildRow(raw, rowNum, forcedStore) {
   }
 
   let sell_price_iqd = parseAmount(m.sell_price_iqd)
-  if (sell_price_iqd === null || sell_price_iqd <= 0) {
+  if (sell_price_iqd === null || sell_price_iqd <= 0 || sell_price_iqd > MAX_IQD) {
     issues.push(issue('sell_price_iqd', 'error', 'bad_sell', 'سعر البيع غير صالح'))
     sell_price_iqd = null
   } else sell_price_iqd = Math.round(sell_price_iqd)
 
   let buy_cost_iqd = parseAmount(m.buy_cost_iqd)
-  if (buy_cost_iqd === null || buy_cost_iqd < 0) {
+  if (buy_cost_iqd === null || buy_cost_iqd < 0 || buy_cost_iqd > MAX_IQD) {
     issues.push(issue('buy_cost_iqd', 'error', 'bad_buy', 'كلفة الشراء غير صالحة'))
     buy_cost_iqd = null
   } else buy_cost_iqd = Math.round(buy_cost_iqd)
@@ -115,7 +121,7 @@ function buildRow(raw, rowNum, forcedStore) {
   }
 
   let delivery_hours = parseAmount(m.delivery_hours)
-  if (delivery_hours === null || delivery_hours <= 0) {
+  if (delivery_hours === null || delivery_hours <= 0 || delivery_hours > MAX_DELIVERY_HOURS) {
     delivery_hours = 24
     issues.push(issue('delivery_hours', 'warn', 'default_delivery', 'مدة التوصيل مفقودة — استُخدم 24 ساعة'))
   } else delivery_hours = Math.round(delivery_hours)

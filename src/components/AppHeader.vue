@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from '@/composables/useToast'
 import { DEFAULT_ROUTE } from '@/router'
@@ -7,6 +8,26 @@ import { useAppStore } from '@/stores/app'
 const app = useAppStore()
 const router = useRouter()
 const { show } = useToast()
+
+const chip = computed(() => {
+  if (app.dataMode === 'remote') {
+    return {
+      text: 'متصل بالخادم',
+      title: 'بياناتك محفوظة في مساحة عمل خاصة بك على الخادم، ومعزولة عن بقية الزوار.',
+      cls: 'border-emerald-200 bg-emerald-50 text-emerald-800',
+      dot: 'bg-emerald-600',
+    }
+  }
+  const unreachable = app.localReason === 'unreachable'
+  return {
+    text: unreachable ? 'وضع محلي (الخادم غير متاح)' : 'وضع محلي',
+    title: unreachable
+      ? 'تعذّر الاتصال بالخادم، فالتطبيق يعمل ببيانات محفوظة في متصفحك فقط.'
+      : 'لم يُضبط خادم: البيانات تُحفظ في متصفحك فقط.',
+    cls: 'border-slate-200 bg-slate-50 text-slate-700',
+    dot: 'bg-slate-500',
+  }
+})
 
 function switchRole(role) {
   if (app.role === role) return
@@ -39,6 +60,11 @@ function reset() {
       </div>
 
       <div class="ms-auto flex flex-wrap items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold" :class="chip.cls" :title="chip.title">
+          <span class="h-1.5 w-1.5 rounded-full" :class="chip.dot" aria-hidden="true" />
+          {{ chip.text }}
+        </span>
+
         <div class="flex rounded-xl bg-slate-100 p-0.5" role="group" aria-label="تبديل الدور">
           <button
             type="button"
@@ -79,6 +105,9 @@ function reset() {
         <button type="button" class="btn-ghost" @click="signOut">خروج</button>
       </div>
     </div>
+    <p v-if="app.syncFailed" role="alert" class="bg-rose-50 px-4 py-1 text-center text-[11px] font-bold text-rose-800">
+      تعذّر حفظ بعض التغييرات على الخادم. أعد تحميل الصفحة؛ قد لا تظهر آخر تغييراتك.
+    </p>
     <p v-if="app.persistFailed" class="bg-amber-50 px-4 py-1 text-center text-[11px] font-bold text-amber-800">
       تعذّر الحفظ في المتصفح (التخزين ممتلئ). التغييرات ستضيع عند إعادة تحميل الصفحة.
     </p>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from '@/composables/useToast'
 import { DEFAULT_ROUTE } from '@/router'
@@ -9,6 +9,11 @@ const app = useAppStore()
 const router = useRouter()
 const { show } = useToast()
 const merchant = ref(app.activeMerchantName)
+const storageNote = computed(() =>
+  app.dataMode === 'remote'
+    ? 'دخول تجريبي بلا كلمة مرور: لكل زائر مساحة عمل خاصة ومعزولة عن بقية الزوار على الخادم، وتُحذف تلقائياً بعد 30 يوماً من عدم الاستخدام. لا ترفع بيانات حقيقية.'
+    : 'دخول تجريبي بلا كلمة مرور: البيانات تُحفظ في متصفحك فقط (وضع محلي) ولا تُرسل إلى أي خادم.',
+)
 
 function enter(role) {
   app.enterAs(role, role === 'merchant' ? merchant.value : undefined)
@@ -46,6 +51,6 @@ function enter(role) {
       </section>
     </div>
 
-    <p class="text-center text-[11px] text-slate-500">دخول تجريبي بلا كلمة مرور: لا توجد مصادقة حقيقية في هذا النموذج، والبيانات تُحفظ في متصفحك فقط.</p>
+    <p class="text-center text-[11px] text-slate-500">{{ storageNote }}</p>
   </div>
 </template>

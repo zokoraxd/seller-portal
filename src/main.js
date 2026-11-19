@@ -12,5 +12,14 @@ import './assets/main.css'
 
 import App from './App.vue'
 import router from './router'
+import { useAppStore } from './stores/app'
 
-createApp(App).use(createPinia()).use(router).mount('#app')
+async function boot() {
+  const pinia = createPinia()
+  const app = createApp(App).use(pinia).use(router)
+  await useAppStore(pinia).init() // connect to Supabase, or fall back to local mode (never throws)
+  await router.isReady()
+  app.mount('#app')
+}
+
+boot()

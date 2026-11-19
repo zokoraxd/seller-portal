@@ -10,14 +10,14 @@ It does two things a spreadsheet-driven marketplace team needs:
 1. **Cleans messy seller sales sheets.** Shops send Excel/CSV files with Arabic headers, Arabic digits (`٢٥٠٠٠`), prices written as `145 الف`, Excel date cells and the odd typo. The import gateway reads them, shows **how each column was understood**, flags every row that is wrong or doubtful, lets the user fix the unclear ones, and only then adds them to the ledger.
 2. **Answers "does this campaign help both sides?"** Given a store's real numbers and a discount that the store and the platform co-fund, the calculator shows profit before and after for **each** side and finds the split where both gain.
 
-> **Unofficial concept prototype.** It is not affiliated with any real company, and it has no backend and no real authentication. All stores, numbers and conversations are fictional. State lives in the browser (`localStorage`).
+> **Unofficial concept prototype.** It is not affiliated with any real company, and it has no real user accounts or passwords (each visitor gets a private anonymous workspace). All stores, numbers and conversations are fictional.
 
 ## Run it
 
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm test         # 140 tests
+npm test         # 151 tests
 npm run build
 ```
 
@@ -80,11 +80,22 @@ Not covered: a manual screen-reader pass (NVDA/VoiceOver). Automated tools find 
 - Favicon set (SVG, 32 px, 180 px Apple touch icon), web manifest, `theme-color`, Open Graph and Twitter card tags with a 1200×630 preview image, canonical link, `robots.txt`, and a real 404 screen.
 - Set `VITE_SITE_URL` (see `.env`) to the deployed URL so canonical and social-card links are absolute.
 
+## Backend (Supabase)
+
+Optional: without the two env vars the app runs entirely in the browser. Copy `.env.example` to `.env.local` and fill in the project URL and **publishable** key to use Supabase (both are public by design; safety comes from row-level security, not from hiding them).
+
+- **One private workspace per visitor.** The app signs each visitor in anonymously (Supabase anonymous auth) and every row carries `owner_id = auth.uid()`. Admin and merchant are two *views* of one workspace, not separate permission levels.
+- **Row-level security on every table** (`ledger_entries`, `offers`, `messages`, `tasks`), one policy per operation, forced for table owners, nothing granted to the `anon` role. Verified with a transaction-wrapped SQL test: workspace A cannot read, update, delete or forge rows of workspace B; the signed-out role has no access; deleting a user cascades to their rows. The Supabase security and performance advisors report no issues.
+- **Database constraints** mirror the validation in `src/core` (value ranges, allowed statuses and categories, shares summing to 100%), so a bad row cannot be stored even if the client is bypassed.
+- **Free-tier protection:** per-workspace row caps (5,000 ledger rows) enforced by a statement-level trigger, and a daily `pg_cron` job that deletes anonymous workspaces idle for 30 days.
+- **Offline-tolerant client:** every change applies instantly and is written to Supabase in order in the background. If the server cannot be reached at start the app uses local mode; if a write fails the user is told the change may not be saved.
+
 ## Assumptions and limits
 
 - The installment-funding factor (default 65%) and the 5%-step split search are modelling assumptions, not measured values.
 - The health score weights (volume 25, sales 20, returns 25, delivery 20, margin 10) are a transparent heuristic, not a real platform's criteria.
-- No server, no auth, no multi-user sync. `localStorage` is the only persistence, and it is validated on load.
+- No email sign-up and no sharing between users: a workspace is one anonymous browser session. Clearing site data starts a new workspace (the old one is purged after 30 idle days).
+- Supabase free plan: projects pause after one week of inactivity and there are no automatic backups. If the server is paused or unreachable the app falls back to local mode and says so in the header.
 - Files are limited to 5 MB and 20,000 rows; parsing runs on the main thread.
 
 ## Stack

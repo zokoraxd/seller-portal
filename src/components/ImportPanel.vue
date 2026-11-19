@@ -146,6 +146,7 @@ const getTemplateCsv = () => downloadCsv(templateRows(templateStore.value), 'sal
         <input type="file" class="sr-only" :accept="ACCEPTED" @change="onPick" />
         <span class="text-sm font-extrabold">{{ busy ? 'جارٍ القراءة…' : 'اسحب ملفاً هنا أو اضغط للاختيار' }}</span>
         <span class="text-[11px] text-slate-500">.xlsx .xls .csv .json — حتى 5 ميغابايت، 20 ألف صف</span>
+        <span class="text-[11px] font-bold text-amber-800">عرض تجريبي: لا ترفع بيانات حقيقية لعملاء أو شركات.</span>
       </label>
 
       <div class="flex flex-col gap-2">
