@@ -1,5 +1,7 @@
 # Seller Portal — concept prototype
 
+**Live demo:** https://seller-portal-azure.vercel.app (Arabic, RTL — click "الدخول كمشرف", then *بوابة البيانات* → "جرّب عينة غير مرتبة")
+
 An Arabic-first (RTL) portal for an online marketplace with two roles:
 
 - **Platform ops:** store analytics, a data-import gateway, a co-funded discount calculator and a salary-cycle radar.
@@ -17,7 +19,7 @@ It does two things a spreadsheet-driven marketplace team needs:
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm test         # 151 tests
+npm test         # 154 tests
 npm run build
 ```
 
@@ -42,7 +44,7 @@ The Vue layer: Pinia store with validated persistence, lazy-loaded routes, Chart
 
 ## Testing
 
-`npm test` runs 140 tests (Vitest). Two groups matter most:
+`npm test` runs 154 tests (Vitest). Two groups matter most:
 
 - **Characterisation tests** (`tests/golden.test.js`). This project grew out of a single-file prototype. `tests/golden.json` holds the numbers the *original* code produced for its own demo data. The refactored modules reproduce every KPI, health score, deal result and optimiser choice exactly.
 - **Regression tests for bugs found in the prototype** (below).
