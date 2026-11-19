@@ -44,6 +44,7 @@ watch(navCount, async () => {
 
     <footer class="border-t border-slate-200 bg-white px-4 py-3 text-center text-[11px] text-slate-600">
       نموذج مفاهيمي غير رسمي — ليس مرتبطاً بأي شركة حقيقية. جميع المتاجر والأرقام والمحادثات تجريبية ومتخيَّلة.
+      <RouterLink :to="{ name: 'privacy' }" class="ms-2 font-bold underline">سياسة الخصوصية</RouterLink>
     </footer>
 
     <HubDrawer v-if="showShell" />

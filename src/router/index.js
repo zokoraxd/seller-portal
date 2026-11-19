@@ -15,6 +15,8 @@ const routes = [
   { path: '/merchant/data', name: 'merchant-data', component: () => import('@/views/DataHub.vue'), meta: { role: 'merchant' } },
   { path: '/merchant/comms', name: 'merchant-comms', component: () => import('@/views/MerchantComms.vue'), meta: { role: 'merchant' } },
 
+  { path: '/privacy', name: 'privacy', component: () => import('@/views/PrivacyView.vue') },
+
   { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('@/views/NotFoundView.vue') },
 ]
 
@@ -42,6 +44,7 @@ const TITLES = {
   'merchant-overview': 'ملخص متجري',
   'merchant-data': 'رفع بيانات البيع',
   'merchant-comms': 'العروض والتواصل',
+  privacy: 'سياسة الخصوصية',
   'not-found': 'الصفحة غير موجودة',
 }
 

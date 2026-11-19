@@ -3,3 +3,5 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /merchant/
+
+Sitemap: https://seller-portal-azure.vercel.app/sitemap.xml

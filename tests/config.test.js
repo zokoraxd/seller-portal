@@ -24,3 +24,14 @@ describe('deploy and PWA config files', () => {
     for (const file of new Set(linked)) expect(fs.existsSync(new URL(`../public${file}`, import.meta.url)), file).toBe(true)
   })
 })
+
+describe('sitemap and robots', () => {
+  it('sitemap lists the public pages with absolute https URLs, and robots.txt points to it', () => {
+    const sitemap = read('public/sitemap.xml')
+    const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
+    expect(urls.length).toBeGreaterThanOrEqual(2)
+    for (const url of urls) expect(url).toMatch(/^https:\/\//)
+    expect(urls.some((u) => u.endsWith('/privacy'))).toBe(true)
+    expect(read('public/robots.txt')).toContain(`Sitemap: ${new URL('sitemap.xml', urls[0]).href}`)
+  })
+})
